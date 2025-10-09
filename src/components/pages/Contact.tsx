@@ -22,18 +22,20 @@ export default function Contact() {
     setFeedback("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      // Django backend call
+      const res = await fetch("https://orange-spork-gx4r5q4grq72vgj-8000.app.github.dev/contact/", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(formData),
+});
 
       const data = await res.json();
+
       if (res.ok) {
         setFeedback("✅ Message sent successfully!");
         setFormData({ name: "", email: "", phone: "", message: "" });
       } else {
-        setFeedback("❌ " + data.message);
+        setFeedback("❌ " + JSON.stringify(data));
       }
     } catch (err) {
       console.error(err);
@@ -76,7 +78,7 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        {/* Right - Contact Form */}
+        {/* Right - Form */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
