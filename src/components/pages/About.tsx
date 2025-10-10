@@ -1,59 +1,146 @@
+"use client";
+
 import { motion } from "framer-motion";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Users, BookOpen, Monitor } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
-export default function AboutSection() {
+// const navLinks = [
+//   { name: "Home", path: "/" },
+//   { name: "About", path: "/about" },
+//   { name: "Courses", path: "/courses" },
+//   { name: "Contact", path: "/contact" },
+// ];
+
+export default function About() {
   return (
-    <section className="bg-muted/30 py-20 px-5 md:px-16">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        
-        {/* Image Section */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          className="relative w-full h-[300px] md:h-[400px]"
-        >
-          <img
-            src="/assets/img2.jpg"
-            alt="SRD Education Center"
-            className="w-full h-full rounded-2xl object-cover shadow-lg"
-          />
-        </motion.div>
+    <main className="bg-gray-50 text-gray-800">
+      {/* 🟢 Hero Section */}
+      <section className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-32 px-6">
+        <div className="max-w-6xl mx-auto text-center md:text-left">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-6xl font-extrabold mb-4"
+          >
+            About <span className="text-yellow-400">SRD Education Center</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-lg md:text-xl text-gray-200 mb-6 max-w-2xl"
+          >
+            SRD Education Center is a premier computer coaching institute providing courses like CCC, O Level, DCA, ADCA, and more. 
+            We aim to empower students with the skills needed for the digital world.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="flex justify-center md:justify-start gap-4"
+          >
+            {/* ✅ Fixed NavLink Buttons */}
 
-        {/* Text Section */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            About SRD Education Center
-          </h2>
+            <NavLink to="/courses">
+              <Button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold">
+                Learn More
+              </Button>
+            </NavLink>
 
-          <p className="text-muted-foreground mb-6 leading-relaxed">
-            SRD Education Center is a leading computer training and skill
-            development institute dedicated to empowering students with
-            knowledge, confidence, and practical experience in the world of IT.
-            <br /><br />
-            Established with a vision to make computer education accessible to
-            everyone, SRD Education Center offers a variety of government and
-            professional courses like <strong>DCA, ADCA, CCC, O Level, and
-            Programming in Python, Web Development, and Advanced Excel</strong>.
+            <NavLink to="/contact">
+              <Button variant="outline" className="text-white border-white hover:bg-white hover:text-gray-900">
+                Contact Us
+              </Button>
+            </NavLink>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 🟣 Our Mission */}
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
+          <p className="text-gray-700 text-lg max-w-3xl mx-auto">
+            To provide quality computer education and training that helps students develop technical skills, confidence, and career opportunities in the IT industry.
           </p>
+        </div>
+      </section>
 
-          <p className="text-muted-foreground mb-6 leading-relaxed">
-            Our mission is to deliver quality education that aligns with
-            industry standards, ensuring that every student who joins us
-            becomes job-ready and future-ready. With experienced faculty,
-            modern infrastructure, and a supportive learning environment, we
-            are shaping the next generation of IT professionals.
-          </p>
+      {/* 🔵 Why Choose Us */}
+      <section className="py-20 px-6 bg-gray-100">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Why Choose SRD Education Center?</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="hover:shadow-lg transition-all">
+              <CardHeader className="flex items-center gap-3">
+                <Users className="w-8 h-8 text-indigo-600" />
+                <CardTitle>Expert Trainers</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Our instructors are certified professionals with years of teaching and industry experience.
+                </CardDescription>
+              </CardContent>
+            </Card>
 
-          <Button variant="default" size="lg" className="rounded-xl shadow">
-            Learn More
-          </Button>
-        </motion.div>
-      </div>
-    </section>
+            <Card className="hover:shadow-lg transition-all">
+              <CardHeader className="flex items-center gap-3">
+                <BookOpen className="w-8 h-8 text-indigo-600" />
+                <CardTitle>Comprehensive Courses</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Courses are structured to cover theoretical and practical knowledge for real-world applications.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-all">
+              <CardHeader className="flex items-center gap-3">
+                <Monitor className="w-8 h-8 text-indigo-600" />
+                <CardTitle>Modern Labs</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  State-of-the-art computer labs with the latest software and hardware for hands-on learning.
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* 🟢 Stats Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto flex flex-wrap justify-center gap-12 text-center">
+          <div>
+            <h3 className="text-4xl font-bold text-indigo-600">500+</h3>
+            <p className="text-gray-700 mt-2">Students Trained</p>
+          </div>
+          <div>
+            <h3 className="text-4xl font-bold text-indigo-600">50+</h3>
+            <p className="text-gray-700 mt-2">Certified Courses</p>
+          </div>
+          <div>
+            <h3 className="text-4xl font-bold text-indigo-600">100%</h3>
+            <p className="text-gray-700 mt-2">Satisfaction Rate</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 🔵 Call To Action */}
+      <section className="py-20 px-6 bg-indigo-600 text-white text-center rounded-tl-3xl rounded-tr-3xl">
+        <h2 className="text-3xl font-bold mb-4">Join SRD Education Center Today!</h2>
+        <p className="text-lg mb-6 max-w-2xl mx-auto">
+          Get the best computer education and start your career journey with us.
+        </p>
+        <Button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold">
+          Get Started
+        </Button>
+      </section>
+    </main>
   );
 }

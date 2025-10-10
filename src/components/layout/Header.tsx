@@ -1,57 +1,77 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react"; // lucide-react icons install करें
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Courses", path: "/courses" },
+    
+    { name: "Contact", path: "/contact" },
+  ];
 
   return (
-    <header className="bg-primary text-primary-foreground shadow-lg sticky top-0 z-50">
+    <nav className="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md z-50">
       <div className="container mx-auto flex justify-between items-center p-4">
-        <Link to="/" className="text-2xl font-bold">
-          SRD Education Center
+        {/* Logo */}
+        <Link to="/" className="text-2xl font-bold text-pink-500">
+          SRD Education
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-6">
-          <NavLink to="/" className={({ isActive }) => (isActive ? "font-bold underline" : "")}>
-            Home
-          </NavLink>
-          <NavLink to="/courses" className={({ isActive }) => (isActive ? "font-bold underline" : "")}>
-            Courses
-          </NavLink>
-          <NavLink to="/about" className={({ isActive }) => (isActive ? "font-bold underline" : "")}>
-            About
-          </NavLink>
-          <NavLink to="/contact" className={({ isActive }) => (isActive ? "font-bold underline" : "")}>
-            Contact
-          </NavLink>
-        </nav>
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex gap-6">
+          {navLinks.map((link) => (
+            <li key={link.path}>
+              <NavLink
+                to={link.path}
+                className={({ isActive }) =>
+                  `hover:text-pink-400 transition ${
+                    isActive ? "text-pink-400 font-semibold" : ""
+                  }`
+                }
+              >
+                {link.name}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
 
-        {/* Mobile Menu Button */}
-        <Button variant="secondary" size="icon" className="md:hidden" onClick={() => setOpen(!open)}>
-          <Menu />
-        </Button>
+        {/* Mobile Toggle Button */}
+        <button
+          onClick={toggleMenu}
+          className="md:hidden text-white focus:outline-none"
+        >
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
       </div>
 
-      {/* Mobile Dropdown */}
-      {open && (
-        <div className="md:hidden bg-primary text-center py-4 space-y-2">
-          <NavLink to="/" onClick={() => setOpen(false)} className="block py-1">
-            Home
-          </NavLink>
-          <NavLink to="/courses" onClick={() => setOpen(false)} className="block py-1">
-            Courses
-          </NavLink>
-          <NavLink to="/about" onClick={() => setOpen(false)} className="block py-1">
-            About
-          </NavLink>
-          <NavLink to="/contact" onClick={() => setOpen(false)} className="block py-1">
-            Contact
-          </NavLink>
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-gray-800">
+          <ul className="flex flex-col items-center gap-4 py-4">
+            {navLinks.map((link) => (
+              <li key={link.path}>
+                <NavLink
+                  to={link.path}
+                  onClick={() => setIsOpen(false)}
+                  className={({ isActive }) =>
+                    `block text-lg hover:text-pink-400 ${
+                      isActive ? "text-pink-400 font-semibold" : ""
+                    }`
+                  }
+                >
+                  {link.name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
-    </header>
+    </nav>
   );
 }
