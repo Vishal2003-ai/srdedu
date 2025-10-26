@@ -79,7 +79,7 @@ export default function Home() {
             <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-4">
               Welcome to{" "}
               <span className="text-indigo-600">
-                Career Mantra Computer Coaching Center
+                SRD Info Computer Coaching Center
               </span>
             </h1>
             <p className="text-lg text-gray-700 mb-6">
@@ -112,7 +112,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <img
-              src="/log.webp"
+              src="/srd.jpg"
               alt="Career Mantra Illustration"
               className="rounded-2xl shadow-lg w-full object-cover"
             />
